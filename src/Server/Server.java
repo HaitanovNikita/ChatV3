@@ -7,9 +7,6 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.Executors;
 
 public class Server {
@@ -43,17 +40,14 @@ public class Server {
     static class PostMsessageHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            URI requestURI = exchange.getRequestURI();
-            System.out.println(requestURI.getQuery());
+            String query = exchange.getRequestURI().getQuery();
 
-            String query = requestURI.getQuery();
-            System.out.println("query: "+query+"  length: "+query.length());
             if(query != null) {
                 String[] strQuery = query.split("&message=|name=|&id=");
                 id = Integer.parseInt(strQuery[3]);
                 String response = strQuery[1] + ":" + strQuery[2];
                 arrMessages[id]+=response+"\n";
-                System.out.println(response);
+                System.out.println("response: "+response);
             }
 
             Server.addCors(exchange);
@@ -70,9 +64,14 @@ public class Server {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
 
+            String query = exchange.getRequestURI().getQuery();
+            if(query != null) {
+                String[] strQuery = query.split("id=");
+                id = Integer.parseInt(strQuery[1]);
+            }
+
             Server.addCors(exchange);
             exchange.sendResponseHeaders(200, arrMessages[id].getBytes().length);
-
             OutputStream os = exchange.getResponseBody();
             os.write(arrMessages[id].getBytes());
             os.close();
