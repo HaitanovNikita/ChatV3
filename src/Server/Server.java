@@ -7,20 +7,18 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.Executors;
 
 public class Server {
 
     static int id = 0;
-    static String[] arrMessages = new String[4];
-
+    static HashMap<Integer,String> mapMessages = new HashMap<>();
 
     public Server()  {}
 
     public void starting(){
-        for(int i=0;i<arrMessages.length;i++){
-            arrMessages[i]="";
-        }
         System.out.println("server start");
         InetSocketAddress inetSocketAddress = new InetSocketAddress(3113);
         HttpServer server = null;
@@ -44,13 +42,21 @@ public class Server {
 
             if(query != null) {
                 String[] strQuery = query.split("&message=|name=|&id=");
-                id = Integer.parseInt(strQuery[3]);
-                String response = strQuery[1] + ":" + strQuery[2];
-                arrMessages[id]+=response+"\n";
+                id = Integer.parseInt(strQuery[3]);/*получаем id чата*/
+                String response = ""+strQuery[1] + ":" + strQuery[2]+"\n";/*создаем ответ из имени и сообщения*/
+
+                if (mapMessages.get(id) == null) {
+                    mapMessages.put(id, response);/*если переписка чата с данным id еще не существует, создаем*/
+                } else {
+                    mapMessages.put(id, mapMessages.get(id)+response);/*если переписка чата с данным id существует, дозаписываем*/
+                }
+
                 System.out.println("response: "+response);
             }
 
             Server.addCors(exchange);
+
+
             exchange.sendResponseHeaders(200, 0);
 
             OutputStream os = exchange.getResponseBody();
@@ -70,11 +76,14 @@ public class Server {
                 id = Integer.parseInt(strQuery[1]);
             }
 
+            String answer = mapMessages.get(id)==null?"":mapMessages.get(id);
+
             Server.addCors(exchange);
-            exchange.sendResponseHeaders(200, arrMessages[id].getBytes().length);
+            exchange.sendResponseHeaders(200, answer.getBytes().length);
             OutputStream os = exchange.getResponseBody();
-            os.write(arrMessages[id].getBytes());
+            os.write(answer.getBytes());
             os.close();
+
         }
     }
 
