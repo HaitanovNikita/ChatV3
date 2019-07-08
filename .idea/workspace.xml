@@ -28,10 +28,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Server/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="86" column="9" lean-forward="true" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
+            <state relative-caret-position="338">
+              <caret line="136" column="40" selection-start-line="136" selection-start-column="20" selection-end-line="136" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#checkID#0;class#RegistrationClient#0;class#Server#0" />
+                <element signature="e#4854#5061#0" />
+                <element signature="e#6086#6087#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,6 +67,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -76,12 +81,16 @@
               <item name="Chat_V2_0(3_chats)" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Chat_V2_0(3_chats)" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Chat_V2_0(3_chats)" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -138,14 +147,14 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12934947" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1323752" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Learn" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31239936" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.1594203" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -166,6 +175,23 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Server/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+          <folding>
+            <element signature="e#230#231#0" expanded="true" />
+            <element signature="e#252#253#0" expanded="true" />
+            <element signature="e#303#304#0" expanded="true" />
+            <element signature="e#324#325#0" expanded="true" />
+            <element signature="e#420#421#0" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+            <element signature="e#483#484#0" expanded="true" />
+            <element signature="e#514#515#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -175,10 +201,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="86" column="9" lean-forward="true" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
+        <state relative-caret-position="338">
+          <caret line="136" column="40" selection-start-line="136" selection-start-column="20" selection-end-line="136" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#checkID#0;class#RegistrationClient#0;class#Server#0" />
+            <element signature="e#4854#5061#0" />
+            <element signature="e#6086#6087#0" expanded="true" />
           </folding>
         </state>
       </provider>
