@@ -28,12 +28,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Server/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="136" column="40" selection-start-line="136" selection-start-column="20" selection-end-line="136" selection-end-column="42" />
+            <state relative-caret-position="351">
+              <caret line="48" column="71" selection-start-line="48" selection-start-column="71" selection-end-line="48" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#checkID#0;class#RegistrationClient#0;class#Server#0" />
-                <element signature="e#4854#5061#0" />
+                <element signature="e#6028#6029#0" expanded="true" />
                 <element signature="e#6086#6087#0" expanded="true" />
               </folding>
             </state>
@@ -68,7 +67,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -91,6 +89,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -146,15 +145,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1323752" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13388805" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Learn" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.1594203" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.048309177" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -201,12 +201,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="136" column="40" selection-start-line="136" selection-start-column="20" selection-end-line="136" selection-end-column="42" />
+        <state relative-caret-position="351">
+          <caret line="48" column="71" selection-start-line="48" selection-start-column="71" selection-end-line="48" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#checkID#0;class#RegistrationClient#0;class#Server#0" />
-            <element signature="e#4854#5061#0" />
+            <element signature="e#6028#6029#0" expanded="true" />
             <element signature="e#6086#6087#0" expanded="true" />
           </folding>
         </state>
