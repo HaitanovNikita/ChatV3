@@ -4,9 +4,11 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -27,15 +29,62 @@ public class Server {
         HttpServer server = null;
         try {
             server = HttpServer.create(inetSocketAddress, 5);
-
             server.createContext("/api/post-msg", new PostMsessageHandler());
             server.createContext("/api/get-hystory", new GetHystoryHandler());
             server.createContext("/api/register", new RegistrationClient());
+            server.createContext("/", new StaticHandler());
 
             server.setExecutor(Executors.newCachedThreadPool());
             server.start();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    static class StaticHandler implements HttpHandler {
+
+        private static String pathFile ="C:\\Users\\User\\IdeaProjects\\Chat_V2_0(3_chats)\\static\\";
+
+        @Override
+        public void handle(HttpExchange exchange) throws IOException {
+            String answer="";
+            String nameFile="";
+            String query = exchange.getRequestURI().getQuery();
+            System.out.println(query);
+            if (query != null) {
+                System.out.println("query != null");
+                String[] strQuery = query.split("/");
+                nameFile = strQuery[0];
+                answer = readFile(nameFile);
+            }
+            else{
+                System.out.println("query = null");
+                nameFile = "login.html";
+                answer = readFile(nameFile);
+            }
+
+            addCors(exchange);
+            exchange.sendResponseHeaders(200, answer.getBytes().length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(answer.getBytes());
+            os.close();
+        }
+
+        private String readFile(String nameFile){
+            String fileСontents="";
+            try(FileReader reader = new FileReader(pathFile+nameFile))
+            {
+                int c;
+                while((c=reader.read())!=-1){
+                    //System.out.print((char)c);
+                    fileСontents+=(char)c;
+                }
+//                System.out.println(fileСontents);
+            }
+            catch(IOException ex){
+                System.out.println(ex.getMessage());
+            }
+            return fileСontents;
         }
     }
 
@@ -45,9 +94,25 @@ public class Server {
 
             String query = exchange.getRequestURI().getQuery();
             if (query != null) {
-                String[] strQuery = query.split("&message=|name=|&id=");
+                String[] strQuery = query.split("&message=|name=|&id=|&AuthenticationData=");
                 id = Integer.parseInt(strQuery[3]);/*получаем id чата*/
                 String response = "" + strQuery[1] + ":" + strQuery[2] + "\n";/*создаем ответ из имени и сообщения*/
+                String[] authenticationData = strQuery[4].split(" ");
+                System.out.println(Arrays.toString(authenticationData));
+
+                //Если в чате не авторизированный
+                if(mapLoginDetails.get(authenticationData[0])==null){
+                    System.out.println("Злоумышленик");
+                    String unauthorized401 = "401 - Unauthorized";
+                    Server.addCors(exchange);
+                    exchange.sendResponseHeaders(401, unauthorized401.getBytes().length);
+                    OutputStream os = exchange.getResponseBody();
+                    os.write(unauthorized401.getBytes());
+                    os.close();
+                    return;
+                }else {
+                    System.out.println("Все нормально");
+                }
 
                 if (mapMessages.get(id) == null) {
                     mapMessages.put(id, response);/*если переписка чата с данным id еще не существует, создаем*/
@@ -73,6 +138,7 @@ public class Server {
         public void handle(HttpExchange exchange) throws IOException {
 
             String query = exchange.getRequestURI().getQuery();
+
             if (query != null) {
                 String[] strQuery = query.split("id=");
                 id = Integer.parseInt(strQuery[1]);
@@ -136,6 +202,7 @@ public class Server {
             String value = "login:" + login + " password:" + password;
             if (mapLoginDetails.get(login) == null) {
                 mapLoginDetails.put(login, value);
+                System.out.println("login:"+login   );
                 answer = "Registration completed successfully!";
             } else {
                 answer = "A user with this login already exists, select something else.";
