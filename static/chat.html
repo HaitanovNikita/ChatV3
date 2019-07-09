@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html>
+<meta charset="utf-8">
+<body bgcolor=darkslategrey >
+        <style type="text/css">
+            BODY { margin-bottom: 50px; }
+            #footer {
+             position: fixed; /* Фиксированное положение */
+             left: 0; bottom: 0; /* Левый нижний угол */
+             padding: 10px; /* Поля вокруг текста */
+             background: #39b54a; /* Цвет фона */
+             color: #fff; /* Цвет текста */
+             width: 100%; /* Ширина слоя */
+            }
+           </style>
+    <form id="form1" ></form>
+    <!-- <form id="form2"></form>
+     <form id="form3"></form> -->
+    <!-- <form id="form3"></form>
+    <form id="form4"></form>
+    <form id="form5"></form> -->
+
+    <div id="footer">&copy; HN Haitanov Nikita </div>
+                    
+                    <script type="text/javascript">
+
+
+                        class Chat{
+
+                            constructor(view, id) {
+                                this.id = id;
+                                view.innerHTML=` <div style = "position: relative; left:80px; width:150px; height: 30px; background: #39b54a;">
+                                    <b style="position: absolute; top:5px; left:10px; width: 130px; height: 20px; background: #8ef5a9">Enter your name:</b>
+                                </div>
+                            <p>
+                                <div style = "position: relative; width:330px; height: 40px; background: #39b54a">
+                                    <input id="name" type="text" value="" style="position: absolute; top:5px; left:10px; width: 310px; height: 25px;">
+                                </div>
+                            <p>
+                                <div style = "position: relative; width:330px; height: 320px; top: 10px; background: #39b54a">
+                                    <textarea id="chat" value="" style="position: absolute; top:5px; left:10px; width: 310px; height:300px;"></textarea>
+                                </div>
+                            <p>
+                                <div style = "position: relative; width:330px; height: 40px; top: 5px; background: #39b54a"> 
+                                    <input id="message" type="text" value="" style="position: absolute; top:5px; left:10px; width: 240px; height: 25px;">
+                                    <input id="send" type="button" value="Send" style="position: absolute; top:6px; left:255px; width: 70px; height: 30px; background: #8ef5a9; color:darkslategrey;">
+                                </div>`;
+
+                                this.initUI(view);
+                                this.initChatUpdates();    
+                            }
+
+                            
+
+                            initUI(view) {  
+                            this.localPath='http://192.168.1.100';
+                            document.getElementById("name").value=localStorage.getItem("userName"); 
+                            this.unserNameInput = localStorage.getItem("userName"); 
+                            // this.unserNameInput = view.name;
+                            this.chatBoard = view.chat;
+                            this.messageInput = view.message;
+
+                            view.send.addEventListener("click", () => {    
+                            this.sendMessage();
+                            });
+                            }
+
+                            sendMessage() {
+                            const userName = this.unserNameInput;
+                            const newMessage = this.messageInput.value;
+                            const id = this.id;
+                            const authenticationData = localStorage.getItem("AuthenticationData");
+                            alert(authenticationData);
+
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'http://192.168.1.100:3113/api/post-msg/?name=' + userName + '&message=' + newMessage+'&id='+id+'&AuthenticationData='+authenticationData , false);
+                            xhr.send();
+
+                            if (xhr.status != 200) {
+                            alert(xhr.status + ': ' + xhr.statusText); 
+                            }
+
+                            }
+
+                            updateChat() {
+                            const id = this.id;
+                            
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'http://192.168.1.100:3113/api/get-hystory/?id='+id, false);
+                            xhr.send();
+
+                            if (xhr.status != 200) {
+                            alert(xhr.status + ': ' + xhr.statusText); 
+                            } else {
+                                if(xhr.responseText==="")
+
+                            this.chatBoard.value = xhr.responseText + '\n';
+                            }
+                            }
+
+                            initChatUpdates() {
+                                setInterval(() => {this.updateChat();}, 1000);
+                            }
+
+                        }
+                        const chat1 = new Chat(document.getElementById("form1"), "1");
+                        // const chat2 = new Chat(document.getElementById("form2"), "2");
+                        // const chat3 = new Chat(document.getElementById("form3"), "3");
+                        // const chat4 = new Chat(document.getElementById("form4"), "4");
+                        // const chat5 = new Chat(document.getElementById("form5"), "5");
+                       
+        </script>
+    
+</body>
+
+</html>
