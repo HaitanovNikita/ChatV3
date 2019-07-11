@@ -28,13 +28,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Server/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+            <state relative-caret-position="68">
+              <caret line="107" column="59" selection-start-line="107" selection-start-column="59" selection-end-line="107" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="class#PostMsessageHandler#0;class#Server#0" />
-                <element signature="class#GetHystoryHandler#0;class#Server#0" />
+                <element signature="e#1911#1912#0" expanded="true" />
+                <element signature="e#1961#1962#0" expanded="true" />
+                <element signature="method#validateCheckClient#0;class#PostMsessageHandler#0;class#Server#0" />
                 <element signature="class#RegistrationClient#0;class#Server#0" />
+                <element signature="method#handle#0;class#RegistrationClient#0;class#Server#0" />
+                <element signature="method#logIn#0;class#RegistrationClient#0;class#Server#0" />
+                <element signature="method#registration#0;class#RegistrationClient#0;class#Server#0" />
+                <element signature="method#checkID#0;class#RegistrationClient#0;class#Server#0" />
+                <element signature="e#8606#8607#0" expanded="true" />
+                <element signature="e#8664#8665#0" expanded="true" />
                 <element signature="method#addCors#0;class#Server#0" />
               </folding>
             </state>
@@ -69,10 +76,11 @@
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
+      <showMembers ProjectPane="true" />
+      <abbreviatePackageNames ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -84,23 +92,13 @@
             <path>
               <item name="Chat_V2_0(3_chats)" type="b2602c69:ProjectViewProjectNode" />
               <item name="Chat_V2_0(3_chats)" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Chat_V2_0(3_chats)" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Chat_V2_0(3_chats)" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Chat_V2_0(3_chats)" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Chat_V2_0(3_chats)" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -163,16 +161,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13691376" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13918306" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Learn" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26409018" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33977455" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -240,13 +237,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="61" column="16" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+        <state relative-caret-position="68">
+          <caret line="107" column="59" selection-start-line="107" selection-start-column="59" selection-end-line="107" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#PostMsessageHandler#0;class#Server#0" />
-            <element signature="class#GetHystoryHandler#0;class#Server#0" />
+            <element signature="e#1911#1912#0" expanded="true" />
+            <element signature="e#1961#1962#0" expanded="true" />
+            <element signature="method#validateCheckClient#0;class#PostMsessageHandler#0;class#Server#0" />
             <element signature="class#RegistrationClient#0;class#Server#0" />
+            <element signature="method#handle#0;class#RegistrationClient#0;class#Server#0" />
+            <element signature="method#logIn#0;class#RegistrationClient#0;class#Server#0" />
+            <element signature="method#registration#0;class#RegistrationClient#0;class#Server#0" />
+            <element signature="method#checkID#0;class#RegistrationClient#0;class#Server#0" />
+            <element signature="e#8606#8607#0" expanded="true" />
+            <element signature="e#8664#8665#0" expanded="true" />
             <element signature="method#addCors#0;class#Server#0" />
           </folding>
         </state>

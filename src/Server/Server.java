@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -43,46 +44,82 @@ public class Server {
 
     static class StaticHandler implements HttpHandler {
 
-        private static String pathFile ="C:\\Users\\User\\IdeaProjects\\Chat_V2_0(3_chats)\\static\\";
+        private final static String PATH_FILE ="C:\\Users\\User\\IdeaProjects\\Chat_V2_0(3_chats)\\static\\";
+
+        String answer="";
+        String nameFile="";
+        String query="";
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            StaticHandler that = (StaticHandler) o;
+            return Objects.equals(query, that.query);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(query);
+        }
 
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            String answer="";
-            String nameFile="";
-            String query = exchange.getRequestURI().getQuery();
-            System.out.println(query);
-            if (query != null) {
+            query = exchange.getRequestURI().toString();
+
+            System.out.println("query: "+exchange.getRequestURI().toString());
+            if (!query.equals("/")) {
                 System.out.println("query != null");
                 String[] strQuery = query.split("/");
-                nameFile = strQuery[0];
+                System.out.println("arrays: "+ Arrays.toString(strQuery));
+                nameFile = strQuery[1];
                 answer = readFile(nameFile);
             }
-            else{
+            else if(query.equals("/")){
                 System.out.println("query = null");
                 nameFile = "login.html";
                 answer = readFile(nameFile);
+
             }
 
-            addCors(exchange);
-            exchange.sendResponseHeaders(200, answer.getBytes().length);
+            if(answer.equals("file not found")){
+                sendResponseHeaders(404,"",exchange);
+            }
+            else{
+                sendResponseHeaders(200,answer,exchange);
+            }
+
+//            addCors(exchange);
+
+        }
+
+
+        private void  sendResponseHeaders(int codeAnswer,String answer,HttpExchange exchange) throws IOException {
+            exchange.sendResponseHeaders(codeAnswer, answer.getBytes().length);
             OutputStream os = exchange.getResponseBody();
             os.write(answer.getBytes());
             os.close();
         }
-
         private String readFile(String nameFile){
             String fileСontents="";
-            try(FileReader reader = new FileReader(pathFile+nameFile))
+
+            File f = new File(PATH_FILE+nameFile);
+            if(!(f.exists() && !f.isDirectory())) {
+                fileСontents=fileСontents="file not found";
+                return fileСontents;
+            }
+
+            try(FileReader reader = new FileReader(PATH_FILE +nameFile))
             {
                 int c;
                 while((c=reader.read())!=-1){
-                    //System.out.print((char)c);
                     fileСontents+=(char)c;
                 }
-//                System.out.println(fileСontents);
+
             }
             catch(IOException ex){
                 System.out.println(ex.getMessage());
+
             }
             return fileСontents;
         }
@@ -96,23 +133,11 @@ public class Server {
             if (query != null) {
                 String[] strQuery = query.split("&message=|name=|&id=|&AuthenticationData=");
                 id = Integer.parseInt(strQuery[3]);/*получаем id чата*/
+
                 String response = "" + strQuery[1] + ":" + strQuery[2] + "\n";/*создаем ответ из имени и сообщения*/
                 String[] authenticationData = strQuery[4].split(" ");
-                System.out.println(Arrays.toString(authenticationData));
 
-                //Если в чате не авторизированный
-                if(mapLoginDetails.get(authenticationData[0])==null){
-                    System.out.println("Злоумышленик");
-                    String unauthorized401 = "401 - Unauthorized";
-                    Server.addCors(exchange);
-                    exchange.sendResponseHeaders(401, unauthorized401.getBytes().length);
-                    OutputStream os = exchange.getResponseBody();
-                    os.write(unauthorized401.getBytes());
-                    os.close();
-                    return;
-                }else {
-                    System.out.println("Все нормально");
-                }
+                validateCheckClient(authenticationData,exchange);
 
                 if (mapMessages.get(id) == null) {
                     mapMessages.put(id, response);/*если переписка чата с данным id еще не существует, создаем*/
@@ -130,6 +155,22 @@ public class Server {
             os.close();
         }
 
+
+        private void validateCheckClient(String[] authenticationData,HttpExchange exchange) throws IOException {
+            //Если в чате не авторизированный
+            if(mapLoginDetails.get(authenticationData[0])==null){
+                System.out.println("Злоумышленик");
+                String unauthorized401 = "401 - Unauthorized";
+                Server.addCors(exchange);
+                exchange.sendResponseHeaders(401, unauthorized401.getBytes().length);
+                OutputStream os = exchange.getResponseBody();
+                os.write(unauthorized401.getBytes());
+                os.close();
+                return;
+            }else {
+                System.out.println("Все нормально");
+            }
+        }
 
     }
 

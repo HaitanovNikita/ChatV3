@@ -55,12 +55,13 @@
                             
 
                             initUI(view) {  
-                            this.localPath='http://192.168.1.100';
+                            this.localPath='http://192.168.0.120';
 
                             // alert(localStorage.getItem("userName"));
-                            // document.getElementById("name").value=localStorage.getItem("userName")
-                            alert("cookies value : "+ document.cookie);
-                             document.getElementById("name").value=document.cookie;
+                            document.getElementById("name").value=localStorage.getItem("userName")
+                           
+                            // alert("cookies value : "+ document.cookie);
+                            //  document.getElementById("name").value=document.cookie;
 
                             this.unserNameInput = localStorage.getItem("userName");
                             this.chatBoard = view.chat;
@@ -79,7 +80,7 @@
                             //alert(authenticationData);
 
                             var xhr = new XMLHttpRequest();
-                            xhr.open('GET', 'http://192.168.1.100:3113/api/post-msg/?name=' + userName + '&message=' + newMessage+'&id='+id+'&AuthenticationData='+authenticationData , false);
+                            xhr.open('GET', this.localPath+':3113/api/post-msg/?name=' + userName + '&message=' + newMessage+'&id='+id+'&AuthenticationData='+authenticationData , false);
                             xhr.send();
 
                             if (xhr.status != 200) {
@@ -92,7 +93,7 @@
                             const id = this.id;
                             
                             var xhr = new XMLHttpRequest();
-                            xhr.open('GET', 'http://192.168.1.100:3113/api/get-hystory/?id='+id, false);
+                            xhr.open('GET', this.localPath+':3113/api/get-hystory/?id='+id, false);
                             xhr.send();
 
                             if (xhr.status != 200) {

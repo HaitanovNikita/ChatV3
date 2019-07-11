@@ -115,7 +115,7 @@
             this.logLogin = view.loglogin;
             this.logPassword = view.logpassword;
 
-            this.localPath='http://192.168.1.100';
+            this.localPath='http://192.168.0.120';
 
             view.registry.addEventListener("click",()=>{
                 document.getElementById("placeRegistration").style.display = "";
@@ -141,7 +141,7 @@
                                     localStorage.setItem("AuthenticationData",authenticationData);
                                     localStorage.setItem("userName", log);
                                     //location.href=this.localPath+"/hnchatmult/";
-                                    location.href='http://192.168.1.100:3113/?chat.html';
+                                    location.href=this.localPath+':3113/?chat.html';
                                 }
                                 else{
                                     alert(xhr.responseText);
@@ -165,7 +165,7 @@
 
                 var xhr = new XMLHttpRequest();
                             
-                            xhr.open('GET', this.localPath+':3113/api/register/?login='+login+'&password='+password+'&id='+id, false);
+                            xhr.open('GET', '/api/register/?login='+login+'&password='+password+'&id='+id, false);
                             xhr.send();
 
                             if (xhr.status != 200) {
@@ -180,11 +180,11 @@
                                     
                                     // var date = new Date(0);
                                     // document.cookie = "name=; path=/; expires=" + date.toUTCString();
-                                    var date = new Date(new Date().getTime() + 60 * 2000);
-                                    document.cookie = "name="+login+"; path: '/'; expires=" + date.toUTCString();
+                                    // var date = new Date(new Date().getTime() + 60 * 2000);
+                                    // document.cookie = "name="+login+"; path: '/'; expires=" + date.toUTCString();
 
                                     //location.href="http://192.168.1.100/hnchatmult/";
-                                    location.href='http://192.168.1.100:3113/?chat.html';
+                                    location.pathname='/chat.html';
                                 }
                                 else if('A user with this login already exists, select something else.'===xhr.responseText){
                                     alert(xhr.responseText);
